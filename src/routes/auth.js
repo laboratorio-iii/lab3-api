@@ -2,7 +2,7 @@
 
 const Router = require('express')
 
-const isAuthenticated = require('../middlewares/auth').isAuthenticated
+const { isAuthenticated } = require('../middlewares/auth')
 
 const AuthController = require('../controllers/Auth.Controller')
 const TestController = require('../controllers/Test.Controller')

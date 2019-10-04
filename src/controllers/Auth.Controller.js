@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 
 const error_types = require('../helpers/errors')
 
+const { secret_key, jwt_lifetime } = require('../config/setup')
+
 function login(req, res) {
     passport.authenticate('local.login', {session: false}, (error, user, info) => {
         try {
@@ -17,11 +19,11 @@ function login(req, res) {
             else {
                 const payload = {
                     sub: user.id,
-                    exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
+                    exp: Date.now() + parseInt(jwt_lifetime),
                     username: user.username
                 }
 
-                const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET)
+                const token = jwt.sign(JSON.stringify(payload), secret_key)
                 res.json({data: user, token: token})
             }
         } catch(e) {

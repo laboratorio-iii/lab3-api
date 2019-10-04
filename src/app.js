@@ -7,8 +7,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const passport = require('passport')
 
-const port = require('./config/setup').port
-const api_base = require('./config/setup').api_base
+const { port, api_base } = require('./config/setup')
 
 
 // Importing Middlewares
@@ -19,7 +18,7 @@ const authRoutes = require('./routes/auth')
 
 // Initialization
 const app = express()
-require('./config/passport')
+require('./lib/passport')
 
 // Settings
 app.set('port', port || 5000)

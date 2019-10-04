@@ -2,22 +2,21 @@
 
 const User = require('../models/User')
 const bcrypt = require('../helpers/bcrypt')
-const Sequelize = require('sequelize')
+// const Sequelize = require('sequelize')
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 
-const secret = require('./setup').secret_key
+const { secret_key } = require('../config/setup')
 
 const localRegisterStrategy = new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true,
     session: false
 
-    }, async (req, username, password, done) => {
+    }, async (username, password, done) => {
         try {
             const users = await User.findAll({
                 where: {
@@ -30,7 +29,7 @@ const localRegisterStrategy = new LocalStrategy({
     
             let newUser = await User.create({
                 username: username,
-                email: req.body.email,
+                email: 'email@gmail.com',
                 password: await bcrypt.encrypPassword(password),
                 rol: 2,
                 estatus: 1,
@@ -60,7 +59,8 @@ const  localLoginStrategy = new LocalStrategy({
         try {
             let user = await User.findOne({
                 where: {
-                    [Sequelize.Op.or]: [{username: username}, {email: username}]
+                    // [Sequelize.Op.or]: [{username: username}, {email: username}]
+                    username
                 }
             })
             if (!user) {
@@ -79,7 +79,7 @@ passport.use('local.login', localLoginStrategy);
 
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: secret
+    secretOrKey: secret_key
 }
 
 const jwtStrategy = new JwtStrategy(opts, async (payload, done) => {
