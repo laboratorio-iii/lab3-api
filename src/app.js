@@ -9,7 +9,6 @@ const passport = require('passport')
 
 const { port, api_base } = require('./config/setup')
 
-
 // Importing Middlewares
 const customMdw = require('./middlewares/custom')
 
@@ -26,7 +25,8 @@ app.set('port', port || 5000)
 // Middlewares
 app.use(morgan('dev'))
 app.use(cors())
-app.use(json())
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 app.use(passport.initialize())
 
 // Routes

@@ -1,26 +1,21 @@
 {
 	"development": {
-		"username": "lab3",
+		"username": "mongodb",
 		"password": "123456",
 		"database": "lab3_dev",
-		"host": "localhost",
-		"dialect": "mongodb",
-		"omitNull": "true"
+		"host": "localhost"
 	},
 	"test": {
-		"username": "lab3",
+		"username": "mongodb",
 		"password": "123456",
 		"database": "lab3_test",
-		"host": "localhost",
-		"dialect": "mongodb",
-		"omitNull": "true"
+		"host": "localhost"
 	},
 	"production": {
 		"use_env_variable": "DATABASE_URL",
 		"username": "process.env.DB_USERNAME",
 		"password": "process.env.DB_PASSWORD",
 		"database": "process.env.DB_NAME",
-		"host": "process.env.DB_HOSTNAME",
-		"dialect": "mongodb"
+		"host": "process.env.DB_HOSTNAME"
 	}
 }
