@@ -1,12 +1,11 @@
 'use strict'
 
-const express = require('express')
-
-const { isAuthenticated } = require('../middlewares/auth')
-
 const AuthController = require('../controllers/Auth.Controller')
 const TestController = require('../controllers/Test.Controller')
 
+const { isAuthenticated } = require('../middlewares/auth')
+
+const express = require('express')
 const router = express.Router()
 
 // api/auth/
