@@ -1,8 +1,7 @@
 'use strict'
 
-const User = require('../models/User')
+const ServiceUser = require('../services/UserService')
 const bcrypt = require('../helpers/bcrypt')
-// const Sequelize = require('sequelize')
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
@@ -18,26 +17,16 @@ const localRegisterStrategy = new LocalStrategy({
 
     }, async (username, password, done) => {
         try {
-            const users = await User.findAll({
-                where: {
-                    username
-                }
-            })
+            const users = await ServiceUser.getUserByField(username)
             if (users.length > 0) {
                 return done(null, false, 'Username already taken')
             }
-    
-            let newUser = await User.create({
+
+            let newUser = await ServiceUser.createUser({
                 username: username,
-                email: 'email@gmail.com',
-                password: await bcrypt.encrypPassword(password),
-                rol: 2,
-                estatus: 1,
-                created_at: Date.now(),
-                updated_at: Date.now()
-            }, {
-                fields: ['username', 'email', 'password', 'rol', 'estatus', 'created_at', 'updated_at']
+                password: await bcrypt.encrypPassword(password)
             })
+
             if (!newUser) {
                 return done(null, false, 'Something went wrong') //Error on BD
             }
@@ -57,12 +46,8 @@ const  localLoginStrategy = new LocalStrategy({
         session: false
     }, async (username, password, done)=>{
         try {
-            let user = await User.findOne({
-                where: {
-                    // [Sequelize.Op.or]: [{username: username}, {email: username}]
-                    username
-                }
-            })
+            let user = await ServiceUser.getUserByField(username)
+            
             if (!user) {
                 return done(null, false, 'User not found')
             }
@@ -84,11 +69,7 @@ const opts = {
 
 const jwtStrategy = new JwtStrategy(opts, async (payload, done) => {
     try{    
-        const user = await User.findOne({
-            where: {
-                id: payload.sub
-            }
-        })
+        const user = await ServiceUser.getUserById(payload.sub)
         if (user) {
             done(null, user)
         } else {

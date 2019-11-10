@@ -18,6 +18,11 @@ async function getUserById(id) {
     return user
 }
 
+async function getUserByField(field) {
+    const user = await User.findOne({$field: field})
+    return user
+}
+
 async function getAllUsers() {
     const users = await User.find()
     return users
@@ -32,6 +37,7 @@ module.exports = {
     createUser,
     updateUser,
     getUserById,
+    getUserByField,
     getAllUsers,
     deleteUserById
   }
