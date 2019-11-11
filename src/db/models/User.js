@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 if (mongoose.connection.readyState === 0)
-    mongoose.connect(require('../connection-config.js'))
+    mongoose.connect(require('../connection-config.js'), require('../../config/mongoose'))
         .catch(err => {
             console.error('mongoose Error', err)
         });
@@ -12,6 +12,7 @@ let UserSchema = new Schema({
 
     username: String,
     password: String,
+    email: String,
     rol: Number,
     image: String,
     status: Number,

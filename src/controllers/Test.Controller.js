@@ -5,7 +5,7 @@ let controller = {
         res.send("Ruta sin proteger");
     },
     protected: (req,res)=>{
-        res.send(`Ok ${req.user.username} ${req.user.email} - Ruta protegida.`);
+        res.send(`Ok ${req.user.username} ${req.user.password} - Ruta protegida.`);
     },
 
 }

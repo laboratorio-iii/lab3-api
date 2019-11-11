@@ -9,10 +9,10 @@ const express = require('express')
 const router = express.Router()
 
 // api/auth/
-// router.post('/login', AuthController.login)
-// router.post('/register', AuthController.register)
+router.post('/login', AuthController.login)
+router.post('/register', AuthController.register)
 
-// router.get('/unprotected', TestController.unprotected)
-// router.get('/protected', isAuthenticated, TestController.protected)
+router.get('/unprotected', TestController.unprotected)
+router.get('/protected', isAuthenticated, TestController.protected)
 
 module.exports = router
