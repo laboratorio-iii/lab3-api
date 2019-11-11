@@ -24,7 +24,7 @@ function login(req, res) {
                 }
 
                 const token = jwt.sign(JSON.stringify(payload), secret_key)
-                res.json({data: user, token: token})
+                res.status(200).json({data: user, token: token})
             }
         } catch(e) {
             // console.log(e)
@@ -44,7 +44,7 @@ function register(req, res, next) {
                 throw new error_types.InfoError(info)
             }
             else {
-                res.json({user})
+                res.status(200).json({user})
             }
         } catch(e) {
             // console.log(e)
@@ -53,7 +53,7 @@ function register(req, res, next) {
     })(req, res, next)
 }
 
-exports.module = {
+module.exports = {
     login,
     register
 }

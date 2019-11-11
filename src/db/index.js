@@ -3,11 +3,10 @@ const path = require('path');
 const mongoose = require('mongoose');
 const names = fs.readdirSync(path.normalize(__dirname + '/models'));
 
-
 let models = {};
 
-if (mongoose.connection.readyState === 0) {
-    mongoose.connect(require('./connection-config.js')).then((res_db) => {
+if (mongoose.connection.readyState /*===0*/ ) {
+    mongoose.connect(require('./connection-config.js'), require('../config/mongoose')).then((res_db) => {
         console.log('Mongoose connected:', require('./connection-config.js'));
         return res_db;
     }).catch(err => {

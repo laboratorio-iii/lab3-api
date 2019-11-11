@@ -17,8 +17,9 @@ const localRegisterStrategy = new LocalStrategy({
 
     }, async (username, password, done) => {
         try {
-            const users = await ServiceUser.getUserByField(username)
-            if (users.length > 0) {
+            const user = await ServiceUser.getUserByUsername(username)
+
+            if (user) {
                 return done(null, false, 'Username already taken')
             }
 
@@ -46,12 +47,15 @@ const  localLoginStrategy = new LocalStrategy({
         session: false
     }, async (username, password, done)=>{
         try {
-            let user = await ServiceUser.getUserByField(username)
-            
+            let user = await ServiceUser.getUserByUsername(username)
+
             if (!user) {
                 return done(null, false, 'User not found')
             }
-            if (!bcrypt.matchPassword(password, user.password)){
+
+            let matchPass = await bcrypt.matchPassword(password, user.password)
+            
+            if(!matchPass){
                 return done(null, false, 'Password does not match')
             }
             return done(null, user) //Login successfully
