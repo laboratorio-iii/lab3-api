@@ -34,7 +34,7 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        const { id } = req.params.d
+        const { id } = req.params.id
         const user = await serviceUser.deleteUserById(id)
         res.status(200).json({message: 'Success'}, user)
     } catch(err) {

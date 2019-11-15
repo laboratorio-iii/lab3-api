@@ -9,7 +9,7 @@ async function createUser(data) {
 }
 
 async function updateUser(id, data) {
-    await user.updateOne({_id: id, data})
+    const user = await User.updateOne({_id: id, data})
     return user
 }
 

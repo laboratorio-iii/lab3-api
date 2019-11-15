@@ -55,7 +55,7 @@ async function getPosts(req, res) {
 
 async function deletePost(req, res) {
     try {
-        const { id } = req.params.d
+        const { id } = req.params.id
         const post = await servicePost.deletePostById(id)
         res.status(200).json({message: 'Success'}, post)
     } catch(err) {
