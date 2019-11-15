@@ -20,6 +20,10 @@ const categoryRoutes = require('./routes/category')
 const stateRoutes = require('./routes/state')
 const cityRoutes = require('./routes/city')
 const commentRoutes = require('./routes/comment')
+const postRoutes = require('./routes/post')
+const followsRoutes = require('./routes/follows')
+const likeRoutes = require('./routes/like')
+const notificationsRoutes = require('./routes/notification')
 
 // Initialization
 const app = express()
@@ -43,6 +47,11 @@ app.use(api_base+'/comment', commentRoutes)
 app.use(api_base+'/person', personRoutes)
 app.use(api_base+'/state', stateRoutes)
 app.use(api_base+'/city', cityRoutes)
+app.use(api_base+'/post', postRoutes)
+app.use(api_base+'/follows', followsRoutes)
+app.use(api_base+'/like', likeRoutes)
+app.use(api_base+'/notifications', notificationsRoutes)
+
 
 app.use(customMdw.errorHandler)
 app.use(customMdw.notFoundHandler)
