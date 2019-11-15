@@ -2,6 +2,17 @@
 
 const servicePerson = require('../services/PersonService')
 
+async function createPerson(req, res) {
+    try {
+        const data = req.body
+        // data.user = req.user
+        const person = await servicePerson.createPerson()
+        res.status(200).json({message: 'Success'}, person)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function getPerson(req, res) {
     try {
         const { id } = req.params.id

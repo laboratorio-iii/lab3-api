@@ -15,6 +15,11 @@ const customMdw = require('./middlewares/custom')
 // Importing Routes
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
+const personRoutes = require('./routes/person')
+const categoryRoutes = require('./routes/category')
+const stateRoutes = require('./routes/state')
+const cityRoutes = require('./routes/city')
+const commentRoutes = require('./routes/comment')
 
 // Initialization
 const app = express()
@@ -33,6 +38,11 @@ app.use(passport.initialize())
 // Routes
 app.use(api_base+'/auth', authRoutes)
 app.use(api_base+'/user', userRoutes)
+app.use(api_base+'/category', categoryRoutes)
+app.use(api_base+'/comment', commentRoutes)
+app.use(api_base+'/person', personRoutes)
+app.use(api_base+'/state', stateRoutes)
+app.use(api_base+'/city', cityRoutes)
 
 app.use(customMdw.errorHandler)
 app.use(customMdw.notFoundHandler)

@@ -2,6 +2,17 @@
 
 const serviceState = require('../services/StateService')
 
+async function createState(req, res) {
+    try {
+        const data = req.body
+        // data.user = req.user
+        const state = await serviceState.createState()
+        res.status(200).json({message: 'Success'}, state)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function getState(req, res) {
     try {
         const { id } = req.params.id

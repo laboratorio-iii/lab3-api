@@ -2,6 +2,17 @@
 
 const serviceComment = require('../services/CommentService')
 
+async function createComment(req, res) {
+    try {
+        const data = req.body
+        // data.user = req.user
+        const comment = await serviceComment.createComment()
+        res.status(200).json({message: 'Success'}, comment)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function getComment(req, res) {
     try {
         const { id } = req.params.id

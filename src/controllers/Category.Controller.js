@@ -2,6 +2,17 @@
 
 const serviceCategory = require('../services/CategoryService')
 
+async function createCategory(req, res) {
+    try {
+        const data = req.body
+        // data.user = req.user
+        const post = await servicePost.createCategory()
+        res.status(200).json({message: 'Success'}, post)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function getCategory(req, res) {
     try {
         const { id } = req.params.id

@@ -2,6 +2,17 @@
 
 const serviceCity = require('../services/CityService')
 
+async function createCity(req, res) {
+    try {
+        const data = req.body
+        // data.user = req.user
+        const city = await serviceCity.createCity()
+        res.status(200).json({message: 'Success'}, city)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function getCity(req, res) {
     try {
         const { id } = req.params.id
