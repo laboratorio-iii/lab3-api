@@ -6,7 +6,7 @@ async function createPost(req, res) {
     try {
         const data = req.body
         // data.user = req.user
-        const post = await servicePost.createPost()
+        const post = await servicePost.createPost(data)
         res.status(200).json({message: 'Success'}, post)
     } catch(err) {
         res.status(401).json({message: 'Failed'})
