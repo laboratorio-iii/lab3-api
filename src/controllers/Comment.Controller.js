@@ -32,6 +32,16 @@ async function getComments(req, res) {
     }
 }
 
+async function getCommentsByPost(req, res) {
+    try {
+        const { post } = req.params.post
+        const comments = await serviceComment.getCommentsByPost(post)
+        res.status(200).json({message: 'Success'}, comments)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function updateComment(req, res) {
     try {
         const { id } = req.params.id
@@ -54,8 +64,10 @@ async function deleteComment(req, res) {
 }
 
 module.exports = {
+    createComment,
     getComment,
     getComments,
+    getCommentsByPost,
     updateComment,
     deleteComment
 }

@@ -2,7 +2,7 @@
 
 const CityController = require('../controllers/City.Controller')
 
-//const { isAuthenticated } = require('../middlewares/auth')
+const { isAuthenticated } = require('../middlewares/auth')
 
 const express = require('express')
 const router = express.Router()

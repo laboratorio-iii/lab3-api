@@ -32,6 +32,16 @@ async function getCities(req, res) {
     }
 }
 
+async function getCitiesByState(req, res) {
+    try {
+        const { state } = req.params.state
+        const cities = await serviceCity.getCitiesByState(state)
+        res.status(200).json({message: 'Success'}, comments)
+    } catch(err) {
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 async function updateCity(req, res) {
     try {
         const { id } = req.params.id
@@ -54,8 +64,10 @@ async function deleteCity(req, res) {
 }
 
 module.exports = {
+    createCity,
     getCity,
     getCities,
+    getCitiesByState,
     updateCity,
     deleteCity
 }

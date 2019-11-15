@@ -54,6 +54,7 @@ async function deleteState(req, res) {
 }
 
 module.exports = {
+    createState,
     getState,
     getStates,
     updateState,

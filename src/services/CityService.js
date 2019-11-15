@@ -18,6 +18,11 @@ async function getCityById(id) {
     return city
 }
 
+async function getCitiesByState(idstate) {
+    const cities = await City.find({state: idstate})
+    return cities
+}
+
 async function getAllCities() {
     const cities = await City.find()
     return cities
@@ -32,6 +37,7 @@ module.exports = {
     createCity,
     updateCity,
     getCityById,
+    getCitiesByState,
     getAllCities,
     deleteCityById
   }

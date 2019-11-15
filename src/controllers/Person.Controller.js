@@ -54,6 +54,7 @@ async function deletePerson(req, res) {
 }
 
 module.exports = {
+    createPerson,
     getPerson,
     getPeople,
     updatePerson,
