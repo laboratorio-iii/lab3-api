@@ -24,7 +24,7 @@ function login(req, res) {
                 }
 
                 const token = jwt.sign(JSON.stringify(payload), secret_key)
-                res.status(200).json({data: user, token: token})
+                res.status(200).json({success: true, user: user, token: token})
             }
         } catch(e) {
             // console.log(e)

@@ -8,6 +8,7 @@ const express = require('express')
 const router = express.Router()
 
 // api/like/
-router.get('/:post', isAuthenticated, LikeController.liking)
+router.post('/:post', isAuthenticated, LikeController.liking)
+router.get('/:post', isAuthenticated, LikeController.getLike)
 
 module.exports = router

@@ -16,7 +16,10 @@ let PostSchema = new Schema({
     category: String,
     image: String,
     price: Number,
-    status: String,
+    status: {
+        type: String,
+        default: 'PA'
+    },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

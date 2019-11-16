@@ -8,18 +8,18 @@ async function createLike(data) {
     return like
 }
 
-async function getLikeByUser(user) {
-    const userFound = await Like.find(user)
+async function getLikeByUser(user, post) {
+    const userFound = await Like.findOne({user, post})
     return userFound
 }
 
-async function getLikesByPost(post) {
-    const likes = await Like.find(post)
-    return likes
+async function getLikeByPost(user, post) {
+    const like = await Like.findOne({user, post})
+    return like
 }
 
 module.exports = {
     createLike,
     getLikeByUser,
-    getLikesByPost
+    getLikeByPost
   }
