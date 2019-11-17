@@ -10,7 +10,7 @@ if (mongoose.connection.readyState === 0)
 
 let PersonSchema = new Schema({
 
-    username: String,
+    user: String,
     firstname: String,
     lastname: String,
     birthdate: Date,

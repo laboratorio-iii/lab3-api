@@ -1,6 +1,7 @@
 'use strict'
 
 const ServiceUser = require('../services/UserService')
+const ServicePerson = require('../services/PersonService')
 const bcrypt = require('../helpers/bcrypt')
 
 const passport = require('passport')
@@ -13,9 +14,10 @@ const { secret_key } = require('../config/setup')
 const localRegisterStrategy = new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
-    session: false
+    session: false,
+    passReqToCallback : true
 
-    }, async (username, password, done) => {
+    }, async (req, username, password, done) => {
         try {
             const user = await ServiceUser.getUserByUsername(username)
 
@@ -25,7 +27,17 @@ const localRegisterStrategy = new LocalStrategy({
 
             let newUser = await ServiceUser.createUser({
                 username: username,
-                password: await bcrypt.encrypPassword(password)
+                password: await bcrypt.encrypPassword(password),
+                image: req.body.image
+            })
+
+            let newPerson = await ServicePerson.createPerson({
+                username: newUser._id,
+                firstname: req.body.person.firstname,
+                lastname: req.body.person.lastname,
+                birthdate: req.body.person.date,
+                state: req.body.person.state,
+                city: req.body.person.city
             })
 
             if (!newUser) {

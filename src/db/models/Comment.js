@@ -12,6 +12,7 @@ let CommentSchema = new Schema({
 
     post: String,
     user: String,
+    avatar: String,
     content: String,
 
     createdAt: { type: Date, default: Date.now },
