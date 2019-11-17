@@ -20,6 +20,10 @@ let PostSchema = new Schema({
         type: Boolean, 
         default: false
     },
+    comments: {
+        type: Array,
+        default: []
+    },
     xsflex: {
         type: Number,
         default: 12
