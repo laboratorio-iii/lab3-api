@@ -1,7 +1,7 @@
 'use strict'
 
 const servicePost = require('../services/PostService')
-
+const serviceLike = require('../services/LikeService')
 async function createPost(req, res) {
     try {
         const data = req.body
@@ -44,12 +44,23 @@ async function getPostsByCategory(req, res) {
     }
 }
 
+// async function getPosts(req, res) {
+//     try {
+//         const posts = await servicePost.getAllPosts()
+//         res.status(200).json({message: 'Success', posts})
+//     } catch(err) {
+//         res.status(401).json({message: 'Failed'})
+//     }
+// }
+
 async function getPosts(req, res) {
     try {
         const posts = await servicePost.getAllPosts()
-        res.status(200).json({message: 'Success', posts})
+
+        const likes = await serviceLike.getLikesByUser('hermes@gmail.com')
+        res.status(200).json({message: 'Success', posts, likes})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 

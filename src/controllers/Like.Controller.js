@@ -41,7 +41,26 @@ async function getLike(req, res) {
     }
 }
 
+async function getLikes(req, res) {
+    try {
+        const user = 'hermes@gmail.com'
+        // const user = req.user
+        const result = await serviceLike.getLikesByUser(user)
+        
+        if (result != null && result.status) {
+            res.status(200).json({message: 'Success', result})    
+        }else {
+            res.status(200).json({message: 'not found'})
+        }
+
+    } catch(err) {
+        console.log(err)
+        res.status(401).json({message: 'Failed'})
+    }
+}
+
 module.exports = {
     liking,
-    getLike
+    getLike, 
+    getLikes
 }
