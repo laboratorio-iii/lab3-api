@@ -16,7 +16,26 @@ let PostSchema = new Schema({
     category: String,
     image: String,
     price: Number,
-    status: String,
+    liked: {
+        type: Boolean, 
+        default: false
+    },
+    comments: {
+        type: Array,
+        default: []
+    },
+    xsflex: {
+        type: Number,
+        default: 12
+    },
+    mdflex: {
+        type: Number,
+        default: 6
+    },
+    status: {
+        type: String,
+        default: 'PA'
+    },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

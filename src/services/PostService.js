@@ -24,7 +24,7 @@ async function getPostsByCategory(category) {
 }
 
 async function getAllPosts() {
-    const posts = await Post.find()
+    const posts = await Post.find({status: 'PA'})
     return posts
 }
 
