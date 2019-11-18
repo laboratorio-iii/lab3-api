@@ -2,10 +2,11 @@
 
 const servicePost = require('../services/PostService')
 const serviceLike = require('../services/LikeService')
+const serviceComment = require('../services/CommentService')
+
 async function createPost(req, res) {
     try {
         const data = req.body
-        // data.user = req.user
         const post = await servicePost.createPost(data)
         res.status(200).json({message: 'Success', post})
     } catch(err) {
@@ -25,8 +26,7 @@ async function getPost(req, res) {
 
 async function getPostsByUser(req, res) {
     try {
-        // const user = req.user
-        const { user } = req.body.user
+        const { user } = req.body
         const posts = await servicePost.getPostsByUser(user)
         res.status(200).json({message: 'Success', posts})
     } catch(err) {
@@ -44,21 +44,14 @@ async function getPostsByCategory(req, res) {
     }
 }
 
-// async function getPosts(req, res) {
-//     try {
-//         const posts = await servicePost.getAllPosts()
-//         res.status(200).json({message: 'Success', posts})
-//     } catch(err) {
-//         res.status(401).json({message: 'Failed'})
-//     }
-// }
-
 async function getPosts(req, res) {
     try {
         const posts = await servicePost.getAllPosts()
-
-        const likes = await serviceLike.getLikesByUser('hermes@gmail.com')
-        res.status(200).json({message: 'Success', posts, likes})
+        
+        const { user } = req.params
+        const likes = await serviceLike.getLikesByUser(user)
+        const comments = await serviceComment.getAllComments() 
+        res.status(200).json({message: 'Success', posts, likes, comments})
     } catch(err) {
         res.status(500).json({message: 'Failed'})
     }

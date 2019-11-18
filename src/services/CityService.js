@@ -1,6 +1,7 @@
 'use strict'
 
 const City = require('../db/models/City')
+const serviceState = require('../services/StateService')
 
 async function createCity(data) {
     const city = new City(data)
@@ -18,8 +19,9 @@ async function getCityById(id) {
     return city
 }
 
-async function getCitiesByState(idstate) {
-    const cities = await City.find({state: idstate})
+async function getCitiesByState(state_name) {
+    const state = await serviceState.getStateByName(state_name)
+    const cities = await City.findOne({state: state._id})
     return cities
 }
 

@@ -7,11 +7,11 @@ const { isAuthenticated } = require('../middlewares/auth')
 const express = require('express')
 const router = express.Router()
 
-// api/user/
-router.post('/registerCity', isAuthenticated, CityController.createCity)
+// api/city/
+// router.post('/', isAuthenticated, CityController.createCity)
 router.put('/:id', isAuthenticated, CityController.updateCity)
-router.get('/', isAuthenticated, CityController.getCities)
-router.get('/:id', isAuthenticated, CityController.getCity)
+router.get('/:state', CityController.getCitiesByState)
+// router.get('/:id', CityController.getCity)
 router.delete('/:id', isAuthenticated, CityController.deleteCity)
 
 module.exports = router

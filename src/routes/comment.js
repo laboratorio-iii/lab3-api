@@ -8,7 +8,7 @@ const express = require('express')
 const router = express.Router()
 
 // api/user/
-router.post('/registerComment', isAuthenticated, CommentController.createComment)
+router.post('/', isAuthenticated, CommentController.createComment)
 router.put('/:id', isAuthenticated, CommentController.updateComment)
 router.get('/', isAuthenticated, CommentController.getComments)
 router.get('/:id', isAuthenticated, CommentController.getComment)

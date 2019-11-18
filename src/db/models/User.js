@@ -12,9 +12,47 @@ let UserSchema = new Schema({
 
     username: String,
     password: String,
-    rol: String,
+    rol: {
+        type: String,
+        default: 'Regular'
+    },
     image: String,
-    status: String,
+    status: {
+        type: String,
+        default: 'UA'
+    },
+
+    //Person
+    firstname: {
+        type: String,
+        default: ''
+    },
+    lastname: {
+        type: String,
+        default: ''
+    },
+    birthdate: {
+        type: Date,
+        default: ''
+    },
+    state: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+
+    //Follows
+    followeds: {
+        type: Array,
+        default: []
+    },
+    followers: {
+        type: Array,
+        default: []
+    },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

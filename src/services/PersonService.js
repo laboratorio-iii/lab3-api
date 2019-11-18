@@ -18,8 +18,8 @@ async function getPersonById(id) {
     return person
 }
 
-async function getPersonByUsername(username) {
-    const person = await Person.findOne({username})
+async function getPersonByUser(user) {
+    const person = await Person.findOne({user})
     return person
 }
 
@@ -37,7 +37,7 @@ module.exports = {
     createPerson,
     updatePerson,
     getPersonById,
-    getPersonByUsername,
+    getPersonByUser,
     getAllPeople,
     deletePersonById
   }

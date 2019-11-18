@@ -18,6 +18,11 @@ async function getStateById(id) {
     return state
 }
 
+async function getStateByName(name) {
+    const state = await State.findOne({name})
+    return state
+}
+
 async function getAllStates() {
     const states = await State.find()
     return states
@@ -32,6 +37,7 @@ module.exports = {
     createState,
     updateState,
     getStateById,
+    getStateByName,
     getAllStates,
     deleteStateById
   }
