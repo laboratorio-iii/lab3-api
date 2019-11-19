@@ -4,9 +4,10 @@ const serviceLike = require('../services/LikeService')
 
 async function liking(req, res) {
     try {
-        const post = req.params.post
-        const user = 'hermes@gmail.com'
-        // const user = req.user
+        const post = req.body.post
+        const user = req.body.user
+        console.log(post)
+        
         const result = await serviceLike.getLikeByUser(user, post)
         
         if (result != null) {
@@ -26,7 +27,6 @@ async function getLike(req, res) {
     try {
         const post = req.params.post
         const user = 'hermes@gmail.com'
-        // const user = req.user
         const result = await serviceLike.getLikeByPost(user, post)
         
         if (result != null && result.status) {

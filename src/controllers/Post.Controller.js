@@ -47,8 +47,7 @@ async function getPostsByCategory(req, res) {
 async function getPosts(req, res) {
     try {
         const posts = await servicePost.getAllPosts()
-        
-        const { user } = req.params
+        const user = req.params.user
         const likes = await serviceLike.getLikesByUser(user)
         const comments = await serviceComment.getAllComments() 
         res.status(200).json({message: 'Success', posts, likes, comments})
