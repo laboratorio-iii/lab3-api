@@ -11,6 +11,7 @@ const router = express.Router()
 router.put('/:id', isAuthenticated, UserController.updateUser)
 router.get('/', isAuthenticated, UserController.getUsers)
 router.get('/:id', isAuthenticated, UserController.getUser)
+router.post('/search', isAuthenticated, UserController.getUsersBySearch)
 router.delete('/:id', isAuthenticated, UserController.deleteUser)
 
 module.exports = router

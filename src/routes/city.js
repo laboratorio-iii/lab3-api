@@ -13,5 +13,5 @@ router.put('/:id', isAuthenticated, CityController.updateCity)
 router.get('/:state', CityController.getCitiesByState)
 // router.get('/:id', CityController.getCity)
 router.delete('/:id', isAuthenticated, CityController.deleteCity)
-
+router.get('/', isAuthenticated, CityController.getCities)
 module.exports = router
