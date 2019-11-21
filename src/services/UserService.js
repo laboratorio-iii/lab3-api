@@ -33,11 +33,23 @@ async function deleteUserById(id) {
     return user
 }
 
+async function filterUser(param) {
+    const users = await User.find({username: { $regex: '.*' + param + '.*' }})
+    return users
+}
+
+async function filterUserByCity(user, city) {
+    const users = await User.find({ $and: [ { username: { $regex: '.*' + user + '.*' } }, { city } ] })
+    return users
+}
+
 module.exports = {
     createUser,
     updateUser,
     getUserById,
     getUserByUsername,
     getAllUsers,
-    deleteUserById
+    deleteUserById,
+    filterUser,
+    filterUserByCity
   }

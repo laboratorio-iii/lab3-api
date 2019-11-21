@@ -23,6 +23,11 @@ async function getPersonByUser(user) {
     return person
 }
 
+async function getPersonByCity(city) {
+    const person = await Person.findOne({city})
+    return person
+}
+
 async function getAllPeople() {
     const people = await Person.find()
     return people
@@ -38,6 +43,7 @@ module.exports = {
     updatePerson,
     getPersonById,
     getPersonByUser,
+    getPersonByCity,
     getAllPeople,
     deletePersonById
   }
