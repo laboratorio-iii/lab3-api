@@ -8,10 +8,10 @@ const express = require('express')
 const router = express.Router()
 
 // api/state/
-router.post('/', isAuthenticated, StateController.createState)
-router.put('/:id', isAuthenticated, StateController.updateState)
+router.post('/', StateController.createState)
+router.put('/:id', StateController.updateState)
 router.get('/', StateController.getStates)
 router.get('/:id', StateController.getState)
-router.delete('/:id', isAuthenticated, StateController.deleteState)
+router.delete('/:id', StateController.deleteState)
 
 module.exports = router

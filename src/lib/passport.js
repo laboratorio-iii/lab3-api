@@ -28,11 +28,8 @@ const localRegisterStrategy = new LocalStrategy({
             let newUser = await ServiceUser.createUser({
                 username: username,
                 password: await bcrypt.encrypPassword(password),
-                image: req.body.image
-            })
+                image: req.body.image,
 
-            let newPerson = await ServicePerson.createPerson({
-                username: newUser._id,
                 firstname: req.body.person.firstname,
                 lastname: req.body.person.lastname,
                 birthdate: req.body.person.date,

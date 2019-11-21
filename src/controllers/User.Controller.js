@@ -1,7 +1,6 @@
 'use strict'
 
 const serviceUser = require('../services/UserService')
-const servicePerson = require('../services/PersonService')
 
 async function getUser(req, res) {
     try {
@@ -46,19 +45,30 @@ async function deleteUser(req, res) {
 async function getUsersBySearch(req, res) {
     try {
         const input  = req.body.input
-        const cities  = req.body.cities
+        const users = []
+        const fusers = await serviceUser.filterUser(input)
+        fusers.forEach(fuser => {
+            users.push(fuser)
+        })
+        return res.status(200).json({message: 'Success', users})
+        
+    } catch(err) {
+        res.status(500).json({message: 'Failed'})
+    }
+}
 
-        if(cities == ''){
-            const users = await serviceUser.filterUser(input)
-            // console.log(users)
-            res.status(200).json({message: 'Success', users})
-        }else{
-            cities.forEach(async element => {
-                const person = await servicePerson.getPersonByCity(element)
-                console.log(person)
-            });
-            // res.status(200).json({message: 'Success', person})
-        }
+async function getUsersBySearchByCity(req, res) {
+    try {
+        const input  = req.body.input
+        const city  = req.body.city
+        const users = []
+
+        const fusers = await serviceUser.filterUserByCity(input, city)
+        fusers.forEach(fuser => {
+            users.push(fuser)
+        })
+
+        return res.status(200).json({message: 'Success', users})
     } catch(err) {
         res.status(500).json({message: 'Failed'})
     }
@@ -69,5 +79,6 @@ module.exports = {
     getUsers,
     updateUser,
     deleteUser,
-    getUsersBySearch
+    getUsersBySearch,
+    getUsersBySearchByCity
 }

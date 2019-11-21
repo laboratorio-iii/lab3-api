@@ -24,24 +24,19 @@ let UserSchema = new Schema({
 
     //Person
     firstname: {
-        type: String,
-        default: ''
+        type: String
     },
     lastname: {
-        type: String,
-        default: ''
+        type: String
     },
     birthdate: {
-        type: Date,
-        default: ''
+        type: Date
     },
     state: {
-        type: String,
-        default: ''
+        type: String
     },
     city: {
-        type: String,
-        default: ''
+        type: String
     },
 
     //Follows
