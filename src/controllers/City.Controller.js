@@ -34,7 +34,6 @@ async function getCities(req, res) {
 async function getCitiesByState(req, res) {
     try {
         const state = req.params.state
-        console.log(state)
         const cities = await serviceCity.getCitiesByState(state)
         res.status(200).json({message: 'Success', cities})
     } catch(err) {

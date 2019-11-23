@@ -1,9 +1,13 @@
 'use strict'
 
 const User = require('../db/models/User')
+const serviceCity = require('./CityService')
 
 async function createUser(data) {
+    const city = await serviceCity.getCityByName(data.city)
     const user = new User(data)
+    
+    user.city = city._id
     await user.save()
     return user
 }
@@ -19,7 +23,12 @@ async function getUserById(id) {
 }
 
 async function getUserByUsername(username) {
-    const user = await User.findOne({username})
+    const user = await User.findOne({username}).populate({
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        })
     return user
 }
 
@@ -38,8 +47,9 @@ async function filterUser(param) {
     return users
 }
 
-async function filterUserByCity(user, city) {
-    const users = await User.find({ $and: [ { username: { $regex: '.*' + user + '.*' } }, { city } ] })
+async function filterUserByCity(user, city_name) {
+    const city = await serviceCity.getCityByName(city_name)
+    const users = await User.find({ $and: [ { username: { $regex: '.*' + user + '.*' } }, { city: city._id } ] })
     return users
 }
 

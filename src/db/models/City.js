@@ -11,7 +11,7 @@ if (mongoose.connection.readyState === 0)
 let CitySchema = new Schema({
 
     name: String,
-    state: String,
+    state: { type: Schema.ObjectId, ref: "State" },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

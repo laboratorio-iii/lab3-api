@@ -33,7 +33,6 @@ const localRegisterStrategy = new LocalStrategy({
                 firstname: req.body.person.firstname,
                 lastname: req.body.person.lastname,
                 birthdate: req.body.person.date,
-                state: req.body.person.state,
                 city: req.body.person.city
             })
 

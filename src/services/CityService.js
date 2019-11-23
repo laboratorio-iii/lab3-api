@@ -19,6 +19,11 @@ async function getCityById(id) {
     return city
 }
 
+async function getCityByName(name) {
+    const city = await City.findOne({name})
+    return city
+}
+
 async function getCitiesByState(state_name) {
     const state = await serviceState.getStateByName(state_name)
     const cities = await City.findOne({state: state._id})
@@ -39,6 +44,7 @@ module.exports = {
     createCity,
     updateCity,
     getCityById,
+    getCityByName,
     getCitiesByState,
     getAllCities,
     deleteCityById

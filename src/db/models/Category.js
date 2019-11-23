@@ -11,7 +11,7 @@ if (mongoose.connection.readyState === 0)
 let CategorySchema = new Schema({
 
     name: String,
-    status: Boolean,
+    status: { type: Boolean, default: true },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

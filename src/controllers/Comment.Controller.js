@@ -34,7 +34,7 @@ async function getComments(req, res) {
 
 async function getCommentsByPost(req, res) {
     try {
-        const { post } = req.params.post
+        const { post } = req.params
         const comments = await serviceComment.getCommentsByPost(post)
         res.status(200).json({message: 'Success', comments})
     } catch(err) {

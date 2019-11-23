@@ -10,9 +10,8 @@ if (mongoose.connection.readyState === 0)
 
 let CommentSchema = new Schema({
 
-    post: String,
-    user: String,
-    avatar: String,
+    post: { type: Schema.ObjectId, ref: "Post" },
+    user: { type: Schema.ObjectId, ref: "User" },
     content: String,
 
     createdAt: { type: Date, default: Date.now },

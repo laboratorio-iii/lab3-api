@@ -19,7 +19,7 @@ async function getCommentById(id) {
 }
 
 async function getCommentsByPost(idpost) {
-    const comments = await Comment.find({post: idpost})
+    const comments = await Comment.find({post: idpost}).populate('user')
     return comments
 }
 
