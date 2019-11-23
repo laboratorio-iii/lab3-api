@@ -11,7 +11,7 @@ const router = express.Router()
 router.post('/', isAuthenticated, CommentController.createComment)
 router.put('/:id', isAuthenticated, CommentController.updateComment)
 router.get('/', isAuthenticated, CommentController.getComments)
-router.get('/:id', isAuthenticated, CommentController.getComment)
+router.get('/:post', isAuthenticated, CommentController.getCommentsByPost)
 router.delete('/:id', isAuthenticated, CommentController.deleteComment)
 
 module.exports = router

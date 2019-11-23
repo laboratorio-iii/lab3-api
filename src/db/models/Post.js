@@ -10,19 +10,15 @@ if (mongoose.connection.readyState === 0)
 
 let PostSchema = new Schema({
 
-    user: String,
+    user: { type: Schema.ObjectId, ref: "User" },
     title: String,
     description: String,
-    category: String,
+    category: { type: Schema.ObjectId, ref: "Category" },
     image: String,
     price: Number,
     liked: {
         type: Boolean, 
         default: false
-    },
-    comments: {
-        type: Array,
-        default: []
     },
     xsflex: {
         type: Number,

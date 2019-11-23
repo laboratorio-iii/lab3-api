@@ -8,7 +8,7 @@ const express = require('express')
 const router = express.Router()
 
 // api/city/
-// router.post('/', isAuthenticated, CityController.createCity)
+router.post('/', /*isAuthenticated,*/ CityController.createCity)
 router.put('/:id', CityController.updateCity)
 router.get('/:state', CityController.getCitiesByState)
 // router.get('/:id', CityController.getCity)

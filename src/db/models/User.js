@@ -32,22 +32,7 @@ let UserSchema = new Schema({
     birthdate: {
         type: Date
     },
-    state: {
-        type: String
-    },
-    city: {
-        type: String
-    },
-
-    //Follows
-    followeds: {
-        type: Array,
-        default: []
-    },
-    followers: {
-        type: Array,
-        default: []
-    },
+    city: { type: Schema.ObjectId, ref: "City" },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

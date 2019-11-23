@@ -10,8 +10,8 @@ if (mongoose.connection.readyState === 0)
 
 let LikeSchema = new Schema({
 
-    user: String,
-    post: String,
+    user: { type: Schema.ObjectId, ref: "User" },
+    post: { type: Schema.ObjectId, ref: "Post" },
     status: {
         type: Boolean,
         default: true
