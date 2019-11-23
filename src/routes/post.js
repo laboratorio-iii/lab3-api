@@ -11,7 +11,8 @@ const router = express.Router()
 router.get('/', isAuthenticated, PostController.getPosts)
 router.post('/', isAuthenticated, PostController.createPost)
 router.get('/:id', isAuthenticated, PostController.getPost)
-// router.get('/:category', isAuthenticated, PostController.getPostsByCategory)
+router.post('/search', isAuthenticated, PostController.getPostsBySearch)
+router.post('/search/category', isAuthenticated, PostController.getPostsBySearchByCategory)
 router.delete('/:id', isAuthenticated, PostController.deletePost)
 
 module.exports = router

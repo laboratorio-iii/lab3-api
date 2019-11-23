@@ -44,22 +44,9 @@ async function getPostsByCategory(req, res) {
     }
 }
 
-// async function getPosts(req, res) {
-//     try {
-//         const posts = await servicePost.getAllPosts()
-//         const user = req.params.user
-//         const likes = await serviceLike.getLikesByUser(user)
-//         const comments = await serviceComment.getAllComments() 
-//         res.status(200).json({message: 'Success', posts, likes, comments})
-//     } catch(err) {
-//         res.status(500).json({message: 'Failed'})
-//     }
-// }
-
 async function getPosts(req, res) {
     try {
         const posts = await servicePost.getAllPosts()
-        // const likes = await serviceLike.
         res.status(200).json({message: 'Success', posts})
     } catch(err) {
         res.status(500).json({message: 'Failed'})
@@ -76,11 +63,45 @@ async function deletePost(req, res) {
     }
 }
 
+async function getPostsBySearch(req, res) {
+    try {
+        const input  = req.body.input
+        const posts = []
+        const fposts = await servicePost.filterPost(input)
+        fposts.forEach(fpost => {
+            posts.push(fpost)
+        })
+        return res.status(200).json({message: 'Success', posts})
+        
+    } catch(err) {
+        res.status(500).json({message: 'Failed'})
+    }
+}
+
+async function getPostsBySearchByCategory(req, res) {
+    try {
+        const input  = req.body.input
+        const category  = req.body.category
+        const posts = []
+
+        const fposts = await servicePost.filterPostByCategory(input, category)
+        fposts.forEach(fpost => {
+            posts.push(fpost)
+        })
+
+        return res.status(200).json({message: 'Success', posts})
+    } catch(err) {
+        res.status(500).json({message: 'Failed'})
+    }
+}
+
 module.exports = {
     createPost,
     getPost,
     getPostsByUser,
     getPostsByCategory,
     getPosts,
-    deletePost
+    deletePost,
+    getPostsBySearch,
+    getPostsBySearchByCategory
 }

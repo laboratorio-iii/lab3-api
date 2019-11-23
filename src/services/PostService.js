@@ -46,11 +46,40 @@ async function deletePostById(id) {
     return post
 }
 
+async function filterPost(param) {
+    const posts = await Post.find({title: { $regex: '.*' + param + '.*' }}).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
+    return posts
+}
+
+async function filterPostByCategory(title, category_name) {
+    const category = await serviceCategory.getCategoryByName(category_name)
+    const posts = await Post.find({ $and: [ { title: { $regex: '.*' + title + '.*' } }, { category: category._id } ] }).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
+    return posts
+}
+
 module.exports = {
     createPost,
     getPostById,
     getPostsByUser,
     getPostsByCategory,
     getAllPosts,
-    deletePostById
+    deletePostById,
+    filterPost,
+    filterPostByCategory
   }
