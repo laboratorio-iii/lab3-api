@@ -10,7 +10,7 @@ const router = express.Router()
 // api/post/
 router.get('/', isAuthenticated, PostController.getPosts)
 router.post('/', isAuthenticated, PostController.createPost)
-router.get('/:id', isAuthenticated, PostController.getPost)
+router.get('/user/:user', isAuthenticated, PostController.getPostsByUser)
 router.post('/search', isAuthenticated, PostController.getPostsBySearch)
 router.post('/search/category', isAuthenticated, PostController.getPostsBySearchByCategory)
 router.delete('/:id', isAuthenticated, PostController.deletePost)

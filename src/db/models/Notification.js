@@ -10,9 +10,9 @@ if (mongoose.connection.readyState === 0)
 
 let NotificationSchema = new Schema({
 
-    performer: String,
-    receiver: String,
-    type: String,
+    performer: { type: Schema.ObjectId, ref: "User" },
+    receiver: { type: Schema.ObjectId, ref: "User" },
+    type: { type: Schema.ObjectId, ref: "NotificationType" },
     status: String,
 
     createdAt: { type: Date, default: Date.now },

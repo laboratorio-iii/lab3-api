@@ -24,7 +24,7 @@ async function getUserById(id) {
 
 async function getUserByUsername(username) {
     const user = await User.findOne({username}).populate({
-            path: 'city',
+            path: 'city role',
             populate: {
                 path: 'state'
             }
@@ -43,23 +43,13 @@ async function deleteUserById(id) {
 }
 
 async function filterUser(param) {
-    const users = await User.find({username: { $regex: '.*' + param + '.*' }}).populate({
-        path: 'city',
-        populate: {
-            path: 'state'
-        }
-    })
+    const users = await User.find({username: { $regex: '.*' + param + '.*' }})
     return users
 }
 
 async function filterUserByCity(user, city_name) {
     const city = await serviceCity.getCityByName(city_name)
-    const users = await User.find({ $and: [ { username: { $regex: '.*' + user + '.*' } }, { city: city._id } ] }).populate({
-        path: 'city',
-        populate: {
-            path: 'state'
-        }
-    })
+    const users = await User.find({ $and: [ { username: { $regex: '.*' + user + '.*' } }, { city: city._id } ] })
     return users
 }
 

@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = require('../db/models/Post')
+const serviceUser = require('./UserService')
 const serviceCategory = require('./CategoryService')
 
 async function createPost(data) {
@@ -16,8 +17,17 @@ async function getPostById(id) {
     return post
 }
 
-async function getPostsByUser(user) {
-    const posts = await Post.find({user})
+async function getPostsByUser(username) {
+    const user = await serviceUser.getUserByUsername(username)
+    const posts = await Post.find({user: user._id}).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
     return posts
 }
 

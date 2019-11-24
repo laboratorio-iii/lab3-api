@@ -7,7 +7,7 @@ const { isAuthenticated } = require('../middlewares/auth')
 const express = require('express')
 const router = express.Router()
 
-// api/user/
+// api/category/
 router.post('/', isAuthenticated, CategoryController.createCategory)
 router.put('/:id', isAuthenticated, CategoryController.updateCategory)
 router.get('/', isAuthenticated, CategoryController.getCategories)

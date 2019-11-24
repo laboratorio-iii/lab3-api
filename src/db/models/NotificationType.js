@@ -11,7 +11,7 @@ if (mongoose.connection.readyState === 0)
 let NotificationTypeSchema = new Schema({
 
     content: String,
-    post: String,
+    post: { type: Schema.ObjectId, ref: "Post" },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

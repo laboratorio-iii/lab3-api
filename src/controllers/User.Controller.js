@@ -4,8 +4,8 @@ const serviceUser = require('../services/UserService')
 
 async function getUser(req, res) {
     try {
-        const { id } = req.params.id
-        const user = await serviceUser.getUserById(id)
+        const { username } = req.params
+        const user = await serviceUser.getUserByUsername(username)
         res.status(200).json({message: 'Success', user})
     } catch(err) {
         res.status(401).json({message: 'Failed'})

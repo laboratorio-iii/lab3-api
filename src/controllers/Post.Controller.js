@@ -1,8 +1,6 @@
 'use strict'
 
 const servicePost = require('../services/PostService')
-const serviceLike = require('../services/LikeService')
-const serviceComment = require('../services/CommentService')
 
 async function createPost(req, res) {
     try {
@@ -26,7 +24,7 @@ async function getPost(req, res) {
 
 async function getPostsByUser(req, res) {
     try {
-        const { user } = req.body
+        const { user } = req.params
         const posts = await servicePost.getPostsByUser(user)
         res.status(200).json({message: 'Success', posts})
     } catch(err) {
