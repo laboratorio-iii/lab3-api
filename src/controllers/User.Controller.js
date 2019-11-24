@@ -8,7 +8,7 @@ async function getUser(req, res) {
         const user = await serviceUser.getUserByUsername(username)
         res.status(200).json({message: 'Success', user})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -17,18 +17,18 @@ async function getUsers(req, res) {
         const users = await serviceUser.getAllUsers()
         res.status(200).json({message: 'Success', users})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
 async function updateUser(req, res) {
     try {
-        const { id } = req.params.id
+        const { id } = req.params
         const data = req.body
         const user = await serviceUser.updateUser(id, data)
         res.status(200).json({message: 'Success', user})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -38,7 +38,7 @@ async function deleteUser(req, res) {
         const user = await serviceUser.deleteUserById(id)
         res.status(200).json({message: 'Success', user})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
