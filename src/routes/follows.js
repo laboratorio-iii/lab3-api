@@ -11,5 +11,6 @@ const router = express.Router()
 router.post('/', isAuthenticated, FollowsController.following)
 router.get('/follower/:followed', isAuthenticated, FollowsController.getFollower)
 router.get('/followers/:followed', isAuthenticated, FollowsController.getFollowers)
+router.get('/followeds/:follower', isAuthenticated, FollowsController.getFolloweds)
 
 module.exports = router

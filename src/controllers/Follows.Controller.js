@@ -51,8 +51,20 @@ async function getFollowers(req, res) {
     }
 }
 
+async function getFolloweds(req, res) {
+    try {
+        const { follower } = req.params
+        const followeds = await serviceFollows.getFolloweds(follower)
+
+        res.status(200).json({message: 'Success', followeds})
+    } catch(err) {
+        res.status(500).json({message: 'Failed'})
+    }
+}
+
 module.exports = {
     following,
     getFollower,
-    getFollowers
+    getFollowers,
+    getFolloweds
 }

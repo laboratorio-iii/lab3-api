@@ -18,9 +18,16 @@ async function getFollower(follower, followed) {
     const result = await Follows.findOne({follower, followed})
     return result
 }
+
 async function getFollowers(followed) {
     const user = await serviceUser.getUserByUsername(followed)
-    const result = await Follows.find({followed: user._id}).populate('follower')
+    const result = await Follows.find({followed: user._id, status: true}).populate('follower')
+    return result
+}
+
+async function getFolloweds(follower) {
+    const user = await serviceUser.getUserByUsername(follower)
+    const result = await Follows.find({follower: user._id, status: true}).populate('followed')
     return result
 }
 
@@ -28,5 +35,6 @@ module.exports = {
     createFollows,
     getFollowed,
     getFollower,
-    getFollowers
+    getFollowers,
+    getFolloweds
   }
