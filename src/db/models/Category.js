@@ -13,6 +13,11 @@ let CategorySchema = new Schema({
     name: String,
     status: { type: Boolean, default: true },
 
+    followed: {
+        type: Boolean, 
+        default: false
+    },
+
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

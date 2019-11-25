@@ -8,54 +8,33 @@ if (mongoose.connection.readyState === 0)
 
 
 
-let PostSchema = new Schema({
+let Category_FollowsSchema = new Schema({
 
     user: { type: Schema.ObjectId, ref: "User" },
-    title: String,
-    description: String,
     category: { type: Schema.ObjectId, ref: "Category" },
-    image: String,
-    price: Number,
-    liked: {
-        type: Boolean, 
-        default: false
-    },
-    shared: {
-        type: Boolean, 
-        default: false
-    },
-    author: { type: Schema.ObjectId, ref: "User"},
-    xsflex: {
-        type: Number,
-        default: 12
-    },
-    mdflex: {
-        type: Number,
-        default: 6
-    },
     status: {
-        type: String,
-        default: 'PA'
+        type: Boolean,
+        default: true
     },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
 
-PostSchema.pre('save', function (next) {
+Category_FollowsSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
-PostSchema.pre('update', function () {
+Category_FollowsSchema.pre('update', function () {
     this.constructor.update({_id: this._id}, { $set: { updatedAt: Date.now() } });
 });
 
-PostSchema.pre('findOneAndUpdate', function () {
+Category_FollowsSchema.pre('findOneAndUpdate', function () {
     this.constructor.update({_id: this._id}, { $set: { updatedAt: Date.now() } });
 });
 
 
 
-/** @name db.Post */
-module.exports = mongoose.model('Post', PostSchema);
+/** @name db.Category_Follows */
+module.exports = mongoose.model('Category_Follows', Category_FollowsSchema);
