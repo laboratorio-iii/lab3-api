@@ -20,14 +20,14 @@ async function getPostById(id) {
 async function getPostsByUser(username) {
     const user = await serviceUser.getUserByUsername(username)
     const posts = await Post.find({user: user._id}).populate({
-        path: 'user category',
+        path: 'user category author',
         populate: {
             path: 'city',
             populate: {
                 path: 'state'
             }
         }
-    })
+    }).sort({'createdAt': -1})
     return posts
 }
 
@@ -38,14 +38,14 @@ async function getPostsByCategory(category) {
 
 async function getAllPosts() {
     const posts = await Post.find({}).populate({
-            path: 'user category',
+            path: 'user category author',
             populate: {
                 path: 'city',
                 populate: {
                     path: 'state'
                 }
             }
-        })
+        }).sort({'createdAt': -1})
 
     return posts
 }
@@ -58,28 +58,28 @@ async function deletePostById(id) {
 
 async function filterPost(param) {
     const posts = await Post.find({title: { $regex: '.*' + param + '.*' }}).populate({
-        path: 'user category',
+        path: 'user category author',
         populate: {
             path: 'city',
             populate: {
                 path: 'state'
             }
         }
-    })
+    }).sort({'createdAt': -1})
     return posts
 }
 
 async function filterPostByCategory(title, category_name) {
     const category = await serviceCategory.getCategoryByName(category_name)
     const posts = await Post.find({ $and: [ { title: { $regex: '.*' + title + '.*' } }, { category: category._id } ] }).populate({
-        path: 'user category',
+        path: 'user category author',
         populate: {
             path: 'city',
             populate: {
                 path: 'state'
             }
         }
-    })
+    }).sort({'createdAt': -1})
     return posts
 }
 
