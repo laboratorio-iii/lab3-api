@@ -5,6 +5,7 @@ const servicePost = require('../services/PostService')
 async function createPost(req, res) {
     try {
         const data = req.body
+        console.log(data)
         const post = await servicePost.createPost(data)
         res.status(200).json({message: 'Success', post})
     } catch(err) {
