@@ -32,6 +32,18 @@ async function updateUser(req, res) {
     }
 }
 
+async function updateUserSettings(req, res) {
+    try {
+        const { id } = req.params
+        const data = req.body
+        console.log(data)
+        const user = await serviceUser.updateUserSettings(id, data)
+        res.status(200).json({message: 'Success', user})
+    } catch(err) {
+        res.status(500).json({message: 'Failed'})
+    }
+}
+
 async function deleteUser(req, res) {
     try {
         const { id } = req.params.id
@@ -78,6 +90,7 @@ module.exports = {
     getUser,
     getUsers,
     updateUser,
+    updateUserSettings,
     deleteUser,
     getUsersBySearch,
     getUsersBySearchByCity
