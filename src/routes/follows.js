@@ -8,6 +8,9 @@ const express = require('express')
 const router = express.Router()
 
 // api/follows/
-router.get('/:followed', isAuthenticated, FollowsController.following)
+router.post('/', isAuthenticated, FollowsController.following)
+router.get('/follower/:followed', isAuthenticated, FollowsController.getFollower)
+router.get('/followers/:followed', isAuthenticated, FollowsController.getFollowers)
+router.get('/followeds/:follower', isAuthenticated, FollowsController.getFolloweds)
 
 module.exports = router

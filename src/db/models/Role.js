@@ -10,7 +10,7 @@ if (mongoose.connection.readyState === 0)
 
 let RoleSchema = new Schema({
 
-    description: String,
+    name: String,
     status: String,
 
     createdAt: { type: Date, default: Date.now },

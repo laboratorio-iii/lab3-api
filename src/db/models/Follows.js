@@ -10,9 +10,12 @@ if (mongoose.connection.readyState === 0)
 
 let FollowsSchema = new Schema({
 
-    follower: String,
-    followed: String,
-    status: String,
+    follower: { type: Schema.ObjectId, ref: "User" },
+    followed: { type: Schema.ObjectId, ref: "User" },
+    status: {
+        type: Boolean,
+        default: true
+    },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

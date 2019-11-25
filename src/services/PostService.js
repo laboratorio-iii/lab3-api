@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = require('../db/models/Post')
+const serviceUser = require('./UserService')
 const serviceCategory = require('./CategoryService')
 
 async function createPost(data) {
@@ -16,8 +17,17 @@ async function getPostById(id) {
     return post
 }
 
-async function getPostsByUser(user) {
-    const posts = await Post.find({user})
+async function getPostsByUser(username) {
+    const user = await serviceUser.getUserByUsername(username)
+    const posts = await Post.find({user: user._id}).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
     return posts
 }
 
@@ -46,11 +56,40 @@ async function deletePostById(id) {
     return post
 }
 
+async function filterPost(param) {
+    const posts = await Post.find({title: { $regex: '.*' + param + '.*' }}).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
+    return posts
+}
+
+async function filterPostByCategory(title, category_name) {
+    const category = await serviceCategory.getCategoryByName(category_name)
+    const posts = await Post.find({ $and: [ { title: { $regex: '.*' + title + '.*' } }, { category: category._id } ] }).populate({
+        path: 'user category',
+        populate: {
+            path: 'city',
+            populate: {
+                path: 'state'
+            }
+        }
+    })
+    return posts
+}
+
 module.exports = {
     createPost,
     getPostById,
     getPostsByUser,
     getPostsByCategory,
     getAllPosts,
-    deletePostById
+    deletePostById,
+    filterPost,
+    filterPostByCategory
   }

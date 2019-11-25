@@ -5,11 +5,10 @@ const serviceCategory = require('../services/CategoryService')
 async function createCategory(req, res) {
     try {
         const data = req.body
-        console.log(data)
         const category = await serviceCategory.createCategory(data)
         res.status(200).json({message: 'Success', category})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -19,7 +18,7 @@ async function getCategory(req, res) {
         const category = await serviceCategory.getCategoryById(id)
         res.status(200).json({message: 'Success', category})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -28,7 +27,7 @@ async function getCategories(req, res) {
         const categories = await serviceCategory.getAllCategories()
         res.status(200).json({message: 'Success', categories})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -39,7 +38,7 @@ async function updateCategory(req, res) {
         const category = await serviceCategory.updateCategory(id, data)
         res.status(200).json({message: 'Success', category})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 
@@ -49,7 +48,7 @@ async function deleteCategory(req, res) {
         const category = await serviceCategory.deleteCategoryById(id)
         res.status(200).json({message: 'Success', category})
     } catch(err) {
-        res.status(401).json({message: 'Failed'})
+        res.status(500).json({message: 'Failed'})
     }
 }
 

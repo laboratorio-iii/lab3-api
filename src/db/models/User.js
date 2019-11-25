@@ -12,14 +12,19 @@ let UserSchema = new Schema({
 
     username: String,
     password: String,
-    rol: {
-        type: String,
-        default: 'Regular'
+    role: { 
+        type: Schema.ObjectId,
+        ref: "Role",
+        default: '5ddab0b9e0603037f0e3639c'
     },
     image: String,
     status: {
         type: String,
         default: 'UA'
+    },
+    followed: {
+        type: Boolean, 
+        default: false
     },
 
     //Person

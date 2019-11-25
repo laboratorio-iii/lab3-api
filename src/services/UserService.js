@@ -13,7 +13,19 @@ async function createUser(data) {
 }
 
 async function updateUser(id, data) {
-    const user = await User.updateOne({_id: id, data})
+    const user = await User.updateOne({_id: id}, {
+         $set: {
+            firstname: data.firstname,
+            lastname: data.lastname
+        } })
+    return user
+}
+
+async function updateUserSettings(id, data) {
+    const user = await User.updateOne({_id: id}, {
+         $set: {
+            username: data.username
+        } })
     return user
 }
 
@@ -24,7 +36,7 @@ async function getUserById(id) {
 
 async function getUserByUsername(username) {
     const user = await User.findOne({username}).populate({
-            path: 'city',
+            path: 'city role',
             populate: {
                 path: 'state'
             }
@@ -56,6 +68,7 @@ async function filterUserByCity(user, city_name) {
 module.exports = {
     createUser,
     updateUser,
+    updateUserSettings,
     getUserById,
     getUserByUsername,
     getAllUsers,

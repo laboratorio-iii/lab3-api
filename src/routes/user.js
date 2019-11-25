@@ -9,8 +9,9 @@ const router = express.Router()
 
 // api/user/
 router.put('/:id', isAuthenticated, UserController.updateUser)
+router.put('/settings/:id', isAuthenticated, UserController.updateUserSettings)
 router.get('/', isAuthenticated, UserController.getUsers)
-router.get('/:id', isAuthenticated, UserController.getUser)
+router.get('/:username', isAuthenticated, UserController.getUser)
 router.post('/search', isAuthenticated, UserController.getUsersBySearch)
 router.post('/search/city', isAuthenticated, UserController.getUsersBySearchByCity)
 router.delete('/:id', isAuthenticated, UserController.deleteUser)

@@ -24,6 +24,7 @@ const postRoutes = require('./routes/post')
 const followsRoutes = require('./routes/follows')
 const likeRoutes = require('./routes/like')
 const notificationsRoutes = require('./routes/notification')
+const roleRoutes = require('./routes/role')
 
 // Initialization
 const app = express()
@@ -51,6 +52,7 @@ app.use(api_base+'/post', postRoutes)
 app.use(api_base+'/follows', followsRoutes)
 app.use(api_base+'/like', likeRoutes)
 app.use(api_base+'/notifications', notificationsRoutes)
+app.use(api_base+'/role', roleRoutes)
 
 
 app.use(customMdw.errorHandler)
